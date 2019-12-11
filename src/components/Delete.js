@@ -10,9 +10,19 @@ class Delete extends Component {
              commentData:null
         }
     }
+
+    componentDidMount() {
+        this.props.allComments.comments.map(eachComment => {
+            if(eachComment.commentID == this.props.match.params.commentID){
+                this.setState({commentData:eachComment})  // comment and commentID taken from write
+            }
+        })
+    }
+    
     
     render() {
-        console.log(this.props.allComments)
+       // console.log(this.props.allComments)  // checking that we are getting data fromn maptoStateToProps
+        console.log(this.state.commentData)  // now checling we are getting data from state
         return (
             <React.Fragment>
                 <div className="container">
@@ -27,9 +37,9 @@ class Delete extends Component {
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h5 class="card-title">Full Name:</h5>
-                                                {/* <p class="card-text">Comment:{eachComment.comment}</p> */}
-                                                {/* <Link to={`/edit/${eachComment.commentID}`} className="btn btn-primary mr-5">Edit Comment</Link> */}
-                                                <button className="btn btn-danger mr-5">Delete Comment</button>
+                                                <p class="card-text">Comment:{this.state.commentData.comment}</p>
+                                                <Link to="/" className="btn btn-primary mr-5">Delete Comment</Link>
+                                                <Link to="comments" className="btn btn-danger mr-5">Cancel Comment</Link>
                                             </div>
                                         </div>
                                     </div>
